@@ -11,6 +11,15 @@ import java.util.LinkedList;
     private final int blockSize = 3;
     private int board[][] = new int[boardSize][boardSize];
 
+    // numSteps keep tracks of the number of times a number is put into a square. It is incremented everytime a number is popped off of the
+    // linkedlist containing valid numbers for a specific square.
+    private int numSteps = 0;
+    public int getNumSteps() {
+        return numSteps;
+    }
+
+
+
     SudokuBoard9x9(){
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -57,7 +66,6 @@ import java.util.LinkedList;
     }
 
     private boolean solve(int index){
-        //System.out.println("In solve at index: " + index);
         if (index > boardSize * boardSize - 1) return true;   // Stepped outside of the range which means the last cell is
                                                           // valid and the whole board is valid.
         int column = index % boardSize;
@@ -67,8 +75,8 @@ import java.util.LinkedList;
             // The current space has a value of 0 -> This space was not a given
             LinkedList<Integer> validNumbers = getValidNumbersForCell(row, column);
             while (!validNumbers.isEmpty()){              // While there is still something in the list -- The list starts with at most 9 items
-                //System.out.println("The following are valid numbers for index " + index + ": "  + validNumbers);
                 board[row][column] = validNumbers.pop();  // Set the value of board[row][column] to one of the valid numbers
+                numSteps++;
                 if (solve(index + 1)){
                     return true;                          // Return true if solve(index + 1) returns true
                 }

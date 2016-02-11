@@ -7,6 +7,7 @@ package SudokuBoardFactory;
     public interface SudokuBoard {
 
     boolean solve();
+    int getNumSteps();
 
     boolean checkInput();
     boolean checkNumber(int row, int column);
