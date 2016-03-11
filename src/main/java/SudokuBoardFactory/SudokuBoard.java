@@ -11,6 +11,8 @@ package SudokuBoardFactory;
 
     boolean checkInput();
     boolean checkNumber(int row, int column);
+    boolean createdSuccessfully();
+    int[][] getBoard();
     void printBoard();
 
 }
